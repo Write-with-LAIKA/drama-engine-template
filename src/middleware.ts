@@ -2,31 +2,31 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 async function sendFetch(req: NextRequest) {
-  // Clone the request headers
-  const requestHeaders = new Headers()
-
-  // Add API key to Authorization header
-  requestHeaders.set('Authorization', `Bearer ${process.env.DE_BACKEND_API_KEY}`)
-  requestHeaders.set('Accept', 'application/json')
-  requestHeaders.set('Content-Type', 'application/json')
-
   // A default error response
-  const errorResponse: NextResponse = NextResponse.json({ error: 'Unknown error.' }, { status: 502 })
+  const errorResponse: NextResponse = NextResponse.json({ error: 'Unknown error.' }, { status: 502 });
+
+  // Create a headers object
+  const requestHeaders = new Headers();
+
+  // Add authorization and other relevant headers
+  requestHeaders.set('Authorization', `Bearer ${process.env.DE_BACKEND_API_KEY}`);
+  requestHeaders.set('Accept', 'application/json');
+  requestHeaders.set('Content-Type', 'application/json');
 
   const baseURL = process.env.DE_BASE_URL;
-  const newURL = new URL(req.nextUrl.pathname, baseURL).toString()
+  const newURL = new URL(req.nextUrl.pathname, baseURL).toString();
 
   try {
     const response = await fetch(newURL, {
       method: req.method,
       headers: requestHeaders,
       body: req.body,
-    })
+    });
 
     return response;
   } catch (error: any) {
-    console.error(error)
-    return errorResponse
+    console.error(error);
+    return errorResponse;
   }
 }
 
@@ -34,6 +34,7 @@ export async function middleware(request: NextRequest) {
   return await sendFetch(request);
 }
 
+// Use the middleware only for certain endpoints
 export const config = {
   matcher: ['/v1/completions', '/v1/chat/completions']
 };

@@ -3,10 +3,12 @@ import type { NextRequest } from 'next/server'
 
 async function sendFetch(req: NextRequest) {
   // Clone the request headers
-  const requestHeaders = new Headers(req.headers)
+  const requestHeaders = new Headers()
 
   // Add API key to Authorization header
   requestHeaders.set('Authorization', `Bearer ${process.env.DE_BACKEND_API_KEY}`)
+  requestHeaders.set('Accept', 'application/json')
+  requestHeaders.set('Content-Type', 'application/json')
 
   // A default error response
   const errorResponse: NextResponse = NextResponse.json({ error: 'Unknown error.' }, { status: 502 })

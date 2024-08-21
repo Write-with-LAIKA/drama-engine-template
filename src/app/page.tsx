@@ -3,22 +3,27 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const [model, setModel] = useState('meta-llama/Llama-3-8b-hf');
-  const [prompt, setPrompt] = useState('What is the capital of France ?');
+  const [model, setModel] = useState('meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo');
+  const [prompt, setPrompt] = useState('Please list 10 landlocked countries.');
   const [result, setResult] = useState('<response shown here>');
 
   const handleClick = async () => {
     try {
-      const jsonParams = { model: model, prompt: prompt }
-      const response = await fetch('/v1/completions', {
+      const jsonParams = {
+        model: model, messages: [
+          {
+            'role': 'user',
+            'content': prompt
+          }
+        ], max_tokens: 100
+      };
+      const response = await fetch('/v1/chat/completions', {
         method: "POST",
-        body: JSON.stringify(jsonParams),
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          'Accept-Encoding': 'identity'
-        }),
+        body: JSON.stringify(jsonParams)
       });
-      setResult(JSON.stringify(await response.json()));
+      const jsonResponse = await response.json();
+      const outputText = `${jsonResponse.choices[0]?.message.content || 'An error occured.'}\n\nJSON Response:\n\n${JSON.stringify(jsonResponse)}`;
+      setResult(outputText);
     } catch (error) {
       console.error(error);
     }
@@ -48,6 +53,7 @@ export default function Home() {
       </button>
       <textarea
         value={result}
+        rows={15}
         readOnly
         className="w-1/2 px-3 py-2 mt-3 text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       />

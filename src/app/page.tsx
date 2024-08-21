@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function Home() {
   const [model, setModel] = useState('meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo');
-  const [prompt, setPrompt] = useState('Please list 10 landlocked countries.');
+  const [userMessage, setUserMessage] = useState('Please list 10 landlocked countries.');
   const [result, setResult] = useState('<response shown here>');
 
   const handleClick = async () => {
@@ -13,7 +13,7 @@ export default function Home() {
         model: model, messages: [
           {
             'role': 'user',
-            'content': prompt
+            'content': userMessage
           }
         ], max_tokens: 100
       };
@@ -31,6 +31,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
+      <label>Model</label>
       <input
         type="text"
         value={model}
@@ -38,11 +39,12 @@ export default function Home() {
         placeholder="Model"
         className="w-1/5 px-3 py-2 mb-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       />
+      <label>Message</label>
       <input
         type="text"
-        value={prompt}
-        onChange={e => setPrompt(e.target.value)}
-        placeholder="Prompt"
+        value={userMessage}
+        onChange={e => setUserMessage(e.target.value)}
+        placeholder="Message"
         className="w-1/4 px-3 py-2 mb-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       />
       <button

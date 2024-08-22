@@ -1,3 +1,46 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import 'react-tabs/style/react-tabs.css';
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+    max-width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+.chat-message {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.user-message {
+    align-self: flex-start;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.bot-message {
+    align-self: flex-end;
+    background-color: #00bcd4;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.chat-message-content {
+    margin-right: 10px;
+}
+
+.chat-message-sender {
+    font-size: 12px;
+    text-align: right;
+}

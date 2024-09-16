@@ -2,6 +2,9 @@ import { Chat, Context } from "@write-with-laika/drama-engine";
 import { useContext, useState, useEffect } from "react";
 import { DramaContext } from "../contexts/drama-context";
 import { ChatTabsContainer } from "./ChatTabsContainer";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 export const AllChatsContainer = () => {
     const drama = useContext(DramaContext);
@@ -15,6 +18,7 @@ export const AllChatsContainer = () => {
     useEffect(() => {
         async function processChat() {
             if (!loading || !drama) {
+                setLoading(false);
                 return;
             }
             const chats = drama.chats[activeTabIndex];
@@ -37,27 +41,35 @@ export const AllChatsContainer = () => {
     };
 
     return (
-        <div className='flex flex-col h-screen'>
-            <ChatTabsContainer drama={drama} activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} />
-            <div className='flex-row w-full'>
-                <input
-                    type="text"
-                    value={userMessage}
-                    onChange={e => setUserMessage(e.target.value)}
-                    onKeyDown={(event) => {
-                        if (event.key === 'Enter') {
-                            handleClick()
-                        }
-                    }}
-                    placeholder="Message"
-                    className="w-1/4 px-3 py-2 mb-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                />
-                <button
-                    onClick={handleClick}
-                    className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                >
-                    Generate
-                </button>
+        <div className="w-full p-8">
+            <div className="bg-white w-2/3 mx-auto rounded-xl border-black/5 border-2 min-h-[500px] p-2 flex flex-col">
+                <div className="flex-grow">
+                    <ChatTabsContainer drama={drama} activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} />
+                </div>
+                <Separator className="w-full my-2" />
+                <div>
+                    <div className='flex flex-row w-full'>
+                        <Input
+                            type="text"
+                            value={userMessage}
+                            onChange={e => setUserMessage(e.target.value)}
+
+                            onKeyDown={(event) => {
+                                if (event.key === 'Enter') {
+                                    handleClick()
+                                }
+                            }}
+                            placeholder="Message"
+                            className="flex-grow mx-0"
+                        />
+                        <Button
+                            onClick={handleClick}
+                            className="ml-2"
+                        >
+                            Talk
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
     )

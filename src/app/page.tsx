@@ -2,6 +2,9 @@
 import { useState } from 'react';
 import { AllChatsContainer } from './components/AllChatsContainer';
 import { DramaProvider } from './contexts/drama-context';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
 
@@ -18,55 +21,37 @@ export default function Home() {
   return (
     !ready ?
       <div className="modal-overlay">
-        <div className="modal-content">
-          <h2>Enter API details</h2>
+        <div className="w-1/2">
+          <p className='font-semibold'>Drama Engine configuration</p>
+          <p className='text-black/60 text-sm my-2'>Please enter the endpoint configuration and the model name. You can find all of these in the API documentation of your inference provider.</p>
+          
+          <Table>
+            <TableBody>
+              <TableRow key="base_url">
+                <TableCell className="font-medium">Base URL</TableCell>
+                <TableCell><Input className='mx-1' value={baseUrl} onChange={(e) => setBaseUrl(e.target.value)}></Input></TableCell>
+              </TableRow>
+              <TableRow key="endpoint">
+                <TableCell className="font-medium">Endpoint</TableCell>
+                <TableCell><Input className='mx-1' value={endpoint} onChange={(e) => setEndpoint(e.target.value)}></Input></TableCell>
+              </TableRow>
+              <TableRow key="apiKey">
+                <TableCell className="font-medium">API key</TableCell>
+                <TableCell><Input className='mx-1' value={apiKey} onChange={(e) => setApiKey(e.target.value)}></Input></TableCell>
+              </TableRow>
+              <TableRow key="modelName">
+                <TableCell className="font-medium">Model name</TableCell>
+                <TableCell><Input className='mx-1' value={modelName} onChange={(e) => setModelName(e.target.value)}></Input></TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
 
-          <label>
-            Base URL
-            <input
-              type="text"
-              value={baseUrl}
-              onChange={(e) => setBaseUrl(e.target.value)}
-            />
-          </label>
-          <br />
-
-          <label>
-            Endpoint
-            <input
-              type="text"
-              value={endpoint}
-              onChange={(e) => setEndpoint(e.target.value)}
-            />
-          </label>
-          <br />
-
-          <label>
-            API Key
-            <input
-              type="text"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-            />
-          </label>
-          <br />
-
-          <label>
-            Model Name
-            <input
-              type="text"
-              value={modelName}
-              onChange={(e) => setModelName(e.target.value)}
-            />
-          </label>
-          <br />
-
-          <button
+          <Button
             onClick={handleOkClick}
-            className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+            className="my-4"
           >
-            Start
-          </button>
+            Connect
+          </Button>
         </div>
       </div> :
       <DramaProvider baseUrl={baseUrl} endpoint={endpoint} apiKey={apiKey} modelName={modelName}>

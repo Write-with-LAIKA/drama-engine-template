@@ -1,7 +1,8 @@
 "use client";
-import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Drama } from "@write-with-laika/drama-engine";
 import { ChatHistoryContainer } from "./ChatHistoryContainer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
 
 
 type ChatTabsContainerProps = {
@@ -15,16 +16,17 @@ export const ChatTabsContainer: React.FC<ChatTabsContainerProps> = ({ drama, act
         return <div>Loading ...</div>;
     }
     return (
-        <Tabs selectedIndex={activeTabIndex} onSelect={(index) => { setActiveTabIndex(index); }}>
-            <TabList>
+        <Tabs defaultValue={activeTabIndex + "_tab"} onValueChange={(value) => setActiveTabIndex(parseInt(value))}>
+            <TabsList>
                 {drama.chats.map((item, index) => (
-                    <Tab key={index}>{item.id}</Tab>
+                    <TabsTrigger key={index} value={index + "_tab"}>{item.id}</TabsTrigger>
                 ))}
-            </TabList>
+            </TabsList>
             {drama.chats.map((item, index) => (
-                <TabPanel key={index}>
+                <TabsContent value={index + "_tab"} key={index}>
+                    <Separator className="w-full my-2" />
                     <ChatHistoryContainer messages={item.history} />
-                </TabPanel>
+                </TabsContent>
             ))}
         </Tabs>
     );

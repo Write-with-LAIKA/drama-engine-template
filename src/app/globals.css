@@ -1,7 +1,11 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import 'react-tabs/style/react-tabs.css';
+
+body {
+    @apply bg-gray-50;
+}
 
 .chat {
     display: flex;
@@ -21,19 +25,13 @@
 }
 
 .user-message {
-    align-self: flex-start;
-    background-color: #4caf50;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px;
+    align-self: flex-end;
+    @apply bg-sky-600 text-white;
 }
 
 .bot-message {
-    align-self: flex-end;
-    background-color: #00bcd4;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px;
+    align-self: flex-start;
+    @apply bg-indigo-600 text-white;
 }
 
 .chat-message-content {
@@ -41,7 +39,6 @@
 }
 
 .chat-message-sender {
-    font-size: 12px;
     text-align: right;
 }
 
@@ -54,13 +51,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
-    background-color: lightcyan;
-    float: left;
-    width: 500px;
-    text-align: left;
 }
 
 label {
@@ -77,3 +67,9 @@ label {
     flex: 0 0 300px;
     margin-left: 10px;
   }
+
+  @layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}

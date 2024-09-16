@@ -1,6 +1,6 @@
 "use client"
 
-import { defaultModelConfig, Drama } from "@write-with-laika/drama-engine";
+import { Drama } from "@write-with-laika/drama-engine";
 import { createContext, useEffect, useState } from 'react';
 import { testCompanionConfigs } from '../config/companions';
 
@@ -8,22 +8,30 @@ export const DramaContext = createContext<Drama | undefined>(undefined);
 
 interface DramaProps {
     children: React.ReactNode;
+    baseUrl: string;
+    endpoint: string;
+    apiKey: string;
+    modelName: string;
 }
 
-export const DramaProvider = ({ children }: DramaProps) => {
+export const DramaProvider = ({ children, baseUrl, endpoint, apiKey, modelName }: DramaProps) => {
     const [drama, setDrama] = useState<Drama | undefined>();
 
     useEffect(() => {
+        process.env.DE_BASE_URL = baseUrl
+        process.env.DE_ENDPOINT_URL = endpoint
+        process.env.DE_BACKEND_API_KEY = apiKey
+
         const initialiseDrama = async () => {
-            const d = await Drama.initialize("co-working", testCompanionConfigs, {
-                ...defaultModelConfig, model: "meta-llama/Llama-3-8b-chat-hf", max_tokens: 50
+            const d = await Drama.initialize("co-working", testCompanionConfigs, undefined, {
+                defaultModel: { model: modelName, max_tokens: 50 }
             });
             setDrama(d);
 
             d.addChat("water-cooler", "water-cooler", [...d.companions.filter(c => c.configuration.kind == "npc").map(c => c.id), "you"], 8, "auto");
         }
         !drama && initialiseDrama();
-    }, [drama])
+    }, [apiKey, baseUrl, drama, endpoint, modelName])
 
     return (
         <DramaContext.Provider value={drama} >

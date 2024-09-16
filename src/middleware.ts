@@ -13,8 +13,7 @@ async function sendFetch(req: NextRequest) {
   requestHeaders.set('Accept', 'application/json');
   requestHeaders.set('Content-Type', 'application/json');
 
-  const baseURL = process.env.DE_BASE_URL;
-  const newURL = new URL(req.nextUrl.pathname, baseURL).toString();
+  const newURL = new URL(process.env.DE_BASE_URL + req.nextUrl.pathname).toString();
 
   try {
     const response = await fetch(newURL, {

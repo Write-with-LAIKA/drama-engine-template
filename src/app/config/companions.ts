@@ -23,7 +23,6 @@ Some of your traits are:
                 prompt: `You are now in a working environment. You will write in a formal tone.`
             }],
         kind: "npc",
-        modelConfig: { ...defaultModelConfig, max_tokens: 100 }
     },
     {
         name: "Jonas",
@@ -47,7 +46,6 @@ Some of your traits are:
                 prompt: `You are now in a working environment. You will write in a formal tone.`
             }],
         kind: "npc",
-        modelConfig: { ...defaultModelConfig, max_tokens: 100 }
     },
 ];
 

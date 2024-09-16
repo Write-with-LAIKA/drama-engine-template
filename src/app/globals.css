@@ -44,3 +44,36 @@
     font-size: 12px;
     text-align: right;
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: lightcyan;
+    float: left;
+    width: 500px;
+    text-align: left;
+}
+
+label {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    width: 400px;
+    margin-top: 10px;
+    line-height: 20px;
+  }
+
+  input {
+    height: 20px;
+    flex: 0 0 300px;
+    margin-left: 10px;
+  }

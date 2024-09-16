@@ -18,13 +18,19 @@ export const DramaProvider = ({ children, baseUrl, endpoint, apiKey, modelName }
     const [drama, setDrama] = useState<Drama | undefined>();
 
     useEffect(() => {
-        process.env.DE_BASE_URL = baseUrl
         process.env.DE_ENDPOINT_URL = endpoint
-        process.env.DE_BACKEND_API_KEY = apiKey
+
+        const httpClient = (url: string, requestData: any, headers: Headers) => {
+            return fetch(url, {
+                method: "POST",
+                body: JSON.stringify(requestData),
+                headers: { ...headers, "DE_BASE_URL": baseUrl, "DE_BACKEND_API_KEY": apiKey },
+            })
+        }
 
         const initialiseDrama = async () => {
             const d = await Drama.initialize("co-working", testCompanionConfigs, undefined, {
-                defaultModel: { model: modelName, max_tokens: 50 }
+                defaultModel: { model: modelName, max_tokens: 50 }, summaryModel: undefined, chatModeOverride: undefined, httpClient
             });
             setDrama(d);
 

@@ -30,7 +30,7 @@ export const DramaProvider = ({ children, baseUrl, endpoint, apiKey, modelName }
 
         const initialiseDrama = async () => {
             const d = await Drama.initialize("co-working", testCompanionConfigs, undefined, {
-                defaultModel: { model: modelName, max_tokens: 50 }, summaryModel: undefined, chatModeOverride: undefined, httpClient
+                defaultModel: { model: modelName, max_tokens: 200 }, summaryModel: undefined, chatModeOverride: undefined, httpClient
             });
             setDrama(d);
 

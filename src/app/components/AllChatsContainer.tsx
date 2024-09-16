@@ -5,6 +5,8 @@ import { ChatTabsContainer } from "./ChatTabsContainer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import Image from "next/image";
 
 export const AllChatsContainer = () => {
     const drama = useContext(DramaContext);
@@ -42,6 +44,14 @@ export const AllChatsContainer = () => {
 
     return (
         <div className="w-full p-8">
+            <div className="w-2/3 mx-auto my-4 px-4 text-sm text-black/70 flex-row flex items-center">
+                <Image className="mr-2" src="/laika.svg" width={32} height={32} alt="Vercel Logo" />
+                <p className=""><Link className="underline" href="https://drama-engine.com">Drama Engine</Link> chat template</p>
+            </div>
+            <p className='w-2/3 mx-auto text-black/60 text-sm my-4'>
+                This template showcases chat with two companions individually and in a group chat. Edit the companions in <span className="font-mono bg-gray-200">companions.ts</span> to change their personality. More information can be found on the <Link className="underline" href="https://drama-engine.com">project site</Link> and in the <Link className="underline" href="https://github.com/Write-with-LAIKA/drama-engine">git repository</Link>.
+            </p>
+
             <div className="bg-white w-2/3 mx-auto rounded-xl border-black/5 border-2 min-h-[500px] p-2 flex flex-col">
                 <div className="flex-grow">
                     <ChatTabsContainer drama={drama} activeTabIndex={activeTabIndex} setActiveTabIndex={setActiveTabIndex} />

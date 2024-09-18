@@ -16,6 +16,8 @@ export default function Home() {
   const [modelName, setModelName] = useState("NousResearch/Nous-Hermes-2-Yi-34B");
   const [ready, setReady] = useState(false);
 
+  const validConfiguration = () => apiKey.length > 0;
+
   const handleOkClick = () => {
     setReady(true);
   };
@@ -31,10 +33,9 @@ export default function Home() {
             <p className=""><Link className="underline" href="https://drama-engine.com">Drama Engine</Link> chat template</p>
           </div>
 
-          <p className='text-black/60 text-sm my-4'>Please enter your endpoint configuration and the model name.
+          <p className='text-black/60 text-sm my-4'>Please enter your endpoint configuration and the <Link className='underline' href="https://docs.together.ai/docs/chat-models"></Link> model name.
             You can find all of these in the API documentation of your inference provider.
             We have tested the service with <Link className='underline' href={"http://together.ai"}>Together AI</Link> and <Link className='underline' href="http://novita.ai">Novita AI</Link>.</p>
-
 
           <div className="bg-white rounded-xl border-black/5 border-2 p-2 flex flex-col">
             <Table>
@@ -60,6 +61,7 @@ export default function Home() {
 
             <Button
               onClick={handleOkClick}
+              disabled={!validConfiguration()}
               className="mt-4"
             >
               Connect

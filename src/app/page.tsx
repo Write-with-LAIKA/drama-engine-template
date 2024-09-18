@@ -33,7 +33,7 @@ export default function Home() {
             <p className=""><Link className="underline" href="https://drama-engine.com">Drama Engine</Link> chat template</p>
           </div>
 
-          <p className='text-black/60 text-sm my-4'>Please enter your endpoint configuration and the <Link className='underline' href="https://docs.together.ai/docs/chat-models"></Link> model name.
+          <p className='text-black/60 text-sm my-4'>Please enter your endpoint configuration and the <Link className='underline' href="https://docs.together.ai/docs/chat-models">model name</Link>.
             You can find all of these in the API documentation of your inference provider.
             We have tested the service with <Link className='underline' href={"http://together.ai"}>Together AI</Link> and <Link className='underline' href="http://novita.ai">Novita AI</Link>.</p>
 
@@ -53,7 +53,7 @@ export default function Home() {
                   <TableCell><Input className='mx-1' value={apiKey} onChange={(e) => setApiKey(e.target.value)}></Input></TableCell>
                 </TableRow>
                 <TableRow key="modelName">
-                  <TableCell className="font-medium">Model name</TableCell>
+                  <TableCell className="font-medium">API Model String</TableCell>
                   <TableCell><Input className='mx-1' value={modelName} onChange={(e) => setModelName(e.target.value)}></Input></TableCell>
                 </TableRow>
               </TableBody>

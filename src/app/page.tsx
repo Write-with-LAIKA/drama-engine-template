@@ -10,10 +10,10 @@ import Link from 'next/link';
 
 export default function Home() {
 
-  const [baseUrl, setBaseUrl] = useState("https://api.together.xyz");
+  const [baseUrl, setBaseUrl] = useState("https://api.novita.ai/v3/openai");
   const [endpoint, setEndpoint] = useState("/v1/completions");
   const [apiKey, setApiKey] = useState("");
-  const [modelName, setModelName] = useState("NousResearch/Nous-Hermes-2-Yi-34B");
+  const [modelName, setModelName] = useState("teknium/openhermes-2.5-mistral-7b");
   const [ready, setReady] = useState(false);
 
   const validConfiguration = () => apiKey.length > 0;

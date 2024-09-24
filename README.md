@@ -1,6 +1,6 @@
 # Getting Started with the Drama Engine on Vercel and Next.js
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub%2Ecom%2FWrite%2Dwith%2DLAIKA%2Fdrama%2Dengine%2Dtemplate)
 
 This project provides a template to quickly get started with using the [Drama Engine](https://drama-engine.com) with Vercel and the Next.js framework.
 
